@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!------ Include the above in your HEAD tag ---------->
+   
+	<!--Bootsrap 4 CDN-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    
+    <!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-dark " >
+        <a class="navbar-brand  " href="#" style="color:rgb(85, 98, 237);"><b>&#169; HAFC Bank Pvt.Ltd </b></a>
+        <span class="quote text-light">Giving you freedom...</span>
+      </nav>
+      <h2 style="color:white;text-align:center">Transaction Histroy</h2>
+      <table>
+          <thead>
+              <tr><th>Type&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Amount&nbsp;&nbsp;&nbsp;&nbsp;</th></tr>
+          </thead>
+            <tbody>
+                <tr *ngFor="let trans of transaction">
+                    <td>{{trans.type}}</td>
+                    <td>{{trans.amount}}</td>
+                </tr>
+            </tbody>
+      </table>
+      <div id="alink"><a routerLink="/dashBoard">Back to home</a></div>
+</body>
+</html>

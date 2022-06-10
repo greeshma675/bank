@@ -25,12 +25,15 @@
         <a class="navbar-brand  " href="#" style="color:rgb(85, 98, 237);"><b>&#169; HAFC Bank Pvt.Ltd </b></a>
         <span class="quote text-light">Giving you freedom...</span>
       </nav>
-      <button class="btn btn-warning" style="float: right;margin:10px" (click)="logOut()">Log out</button>
+      <button class="btn btn-danger" style="float:right;margin:10px" (click)="deleteAccount()">Delete</button>
+      <button class="btn btn-warning" style="float:right;margin:10px" (click)="logOut()">Log out</button>
 
       <h1 style="color: white;">Welcome {{user}}</h1>
-      
+      <h5 style="color: white;">{{ldate|date:'short'}}</h5>
       <a routerLink="/transaction">View Transaction History</a>
-      <div class="container col-md-12 mt-0">
+      <!-- <app-animationdemo></app-animationdemo> -->
+      <app-deleteconfirm [item]="acno" (onCancel)="cancel()"></app-deleteconfirm>
+      <div class="container col-md-12 mt-0" [ngClass]="acno?'':''">
           <div class="d-flex justify-content-center h-100">
               <div class="card">
                   <div class="card-header">
@@ -38,7 +41,7 @@
                       
                   </div>
                   <div class="card-body">
-                      <form [formGroup]="depositForm">
+                      <form [formGroup]="depositForm" >
                           <div class="input-group form-group">
                               <div class="input-group-prepend">
                                   <span class="input-group-text"><i class="fas fa-user"></i></span>

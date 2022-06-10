@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   // wpassword=""
   // wamount=""
   user:any
+  ldate:any
+  acno:any
   depositForm=this.db.group({
     acno:['',[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]],
     password:['',[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]],
@@ -51,7 +53,7 @@ export class DashboardComponent implements OnInit {
   }
   constructor(private ds:DataService,private db:FormBuilder,private router:Router) {
     this.user=ds.currentUser
-
+    this.ldate=new Date()
    }
    logOut(){
      localStorage.removeItem("currentUser")
@@ -64,5 +66,10 @@ export class DashboardComponent implements OnInit {
       this.router.navigateByUrl('')
     }
   }
-
+  deleteAccount(){
+    this.acno=JSON.parse(localStorage.getItem("currentAcno")||'')
+  }
+  cancel(){
+    this.acno=""
+  }
 }

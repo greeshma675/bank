@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     acno:['',[Validators.required,Validators.pattern('[0-9 ]*')]],
     password:['',[Validators.required,Validators.pattern('[a-zA-Z0-9 ]*')]]
   })
+  //template
   // login(acno:any,pwd:any){
   //   var accno=acno.value
   //   var password=pwd.value
@@ -39,11 +40,28 @@ export class LoginComponent implements OnInit {
     var accno=this.loginForm.value.acno
     var password=this.loginForm.value.password
     if(this.loginForm.valid){
-      const result=this.data.login(accno,password)
-    if(result){
-            alert("Login successfull");
-            this.router.navigateByUrl("dashBoard")
-    }}
+    //   const result=this.data.login(accno,password)
+    // if(result){
+    //         alert("Login successfull");
+    //         this.router.navigateByUrl("dashBoard")
+    // }
+    this.data.login(accno,password).
+    subscribe((result:any)=>{
+      if(result){
+        localStorage.setItem("currentUser",result.currentUser)
+        localStorage.setItem("currentAcno",result.currentAcno)
+        localStorage.setItem("token",result.token)
+        alert(result.message)
+        this.router.navigateByUrl("dashBoard")   
+      }
+    },
+    result=>{
+      alert(result.error.message)
+    }
+    )
+
+  }
+
     else{
       alert("Invalid form")
     }

@@ -32,8 +32,8 @@
       <h5 style="color: white;">{{ldate|date:'short'}}</h5>
       <a routerLink="/transaction">View Transaction History</a>
       <!-- <app-animationdemo></app-animationdemo> -->
-      <app-deleteconfirm [item]="acno" (onCancel)="cancel()"></app-deleteconfirm>
-      <div class="container col-md-12 mt-0" [ngClass]="acno?'':''">
+      <app-deleteconfirm [item]="acno" (onCancel)="cancel()" (onDelete)="onDelete($event)"></app-deleteconfirm>
+      <div class="container col-md-12 mt-0" [ngClass]="acno?'c1':''">
           <div class="d-flex justify-content-center h-100">
               <div class="card">
                   <div class="card-header">
@@ -78,7 +78,7 @@
       </div>
 
       <!-- withdraw -->
-      <div class="container col-md-12 mt-0">
+      <div class="container col-md-12 mt-0" [ngClass]="acno?'c1':''">
         <div class="d-flex justify-content-center h-100">
             <div class="card">
                 <div class="card-header">

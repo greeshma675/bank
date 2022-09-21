@@ -28,14 +28,24 @@ export class RegisterComponent implements OnInit {
     var acno=this.registerForm.value.acno
     var password=this.registerForm.value.password
     if(this.registerForm.valid){
-    const result=this.db.register(username,acno,password)
-    if(result){
-      alert("Successfully registered")
-      this.router.navigateByUrl('')
-    }else{
-      alert("Already existing user");
+    // const result=this.db.register(username,acno,password)
+    // if(result){
+    //   alert("Successfully registered") 
+    //   this.router.navigateByUrl('')
+    // }else{
+    //   alert("Already existing user");
       
-    }
+    // }
+  
+    this.db.register(username,acno,password).
+    subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+       this.router.navigateByUrl('')
+      }
+    },result=>{
+      alert(result.error.message)
+    })
   }
 else{
   alert("Invalid form");

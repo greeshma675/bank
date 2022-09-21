@@ -33,9 +33,14 @@ export class DashboardComponent implements OnInit {
     var password=this.depositForm.value.password
     var amount=this.depositForm.value.amount
     if(this.depositForm.valid){
-    const result=this.ds.deposit(acno,password,amount)
-    if(result)
-    alert(amount+" deposited to your account. Balance ="+result)
+    // const result=this.ds.deposit(acno,password,amount)
+    // if(result)
+    // alert(amount+" deposited to your account. Balance ="+result)
+    this.ds.deposit(acno,password,amount).subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+      }
+    },result=>alert(result.error.message))
     }
     else{
       alert("Invalid form")
@@ -44,24 +49,36 @@ export class DashboardComponent implements OnInit {
   withdraw(){
     var wacno=this.withdrawForm.value.wacno
     var wpassword=this.withdrawForm.value.wpassword
-    
     var wamount=this.withdrawForm.value.wamount
-    const result=this.ds.withdraw(wacno,wpassword,wamount)
-    if(result)
-    alert(wamount+" debited from your account. Balance ="+result)
+
+    // const result=this.ds.withdraw(wacno,wpassword,wamount)
+    // if(result)
+    // alert(wamount+" debited from your account. Balance ="+result)
+    if(this.withdrawForm.valid){
+    this.ds.withdraw(wacno,wpassword,wamount).subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+      }
+    },result=>alert(result.error.message))
+
+    }else{
+      alert("Invalid form")
+    }
     
   }
   constructor(private ds:DataService,private db:FormBuilder,private router:Router) {
-    this.user=ds.currentUser
+    // this.user=ds.currentUser
+        this.user=localStorage.getItem("currentUser")
     this.ldate=new Date()
    }
    logOut(){
      localStorage.removeItem("currentUser")
      localStorage.removeItem("currentAcno")
+     localStorage.removeItem("token")
     this.router.navigateByUrl('')
    }
   ngOnInit(): void {
-    if(!localStorage.getItem("currentAcno")){
+    if(!localStorage.getItem("token")){
       alert("Please login...!!!")
       this.router.navigateByUrl('')
     }
@@ -71,5 +88,13 @@ export class DashboardComponent implements OnInit {
   }
   cancel(){
     this.acno=""
+  }
+  onDelete(event:any){
+    this.ds.deleteAcc(event).subscribe((result:any)=>{
+      if(result){
+        alert(result.message)
+        this.logOut()
+      }
+    },result=>alert(result.error.message))
   }
 }
